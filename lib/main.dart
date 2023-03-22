@@ -5,7 +5,9 @@ import 'package:udemy_flutter/MedicalInformation_screen.dart';
 import 'package:udemy_flutter/login_screen.dart';
 import 'package:udemy_flutter/personalinformaion_screen.dart';
 import 'package:udemy_flutter/test_screen.dart';
-
+import 'package:udemy_flutter/Screens/editprofile.dart';
+import 'package:udemy_flutter/Screens/homescreen.dart';
+import 'package:udemy_flutter/Screens/settings.dart';
 
 
 void main()
@@ -20,7 +22,15 @@ class MYAPP extends StatelessWidget
   {
    return MaterialApp(
      debugShowCheckedModeBanner:false ,
-     home:MedicalInformationScreen(),
+    // home:LoginScreen(),
+       initialRoute: HomeScreen.screenRoute,
+       routes: {
+         HomeScreen.screenRoute: (context) => HomeScreen(),
+         EditProfileUI.screenRoute: (context) =>  EditProfileUI(),
+         SettingsPage.screenRoute: (context) => SettingsPage(),
+         //'contactsscreen': (context) => contactsscreen(),
+         //'carscreen': (context) => carscreen(),
+       }
      );
 
 
