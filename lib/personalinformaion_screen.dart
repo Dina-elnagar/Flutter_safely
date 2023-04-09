@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/MedicalInformation_screen.dart';
+import 'package:udemy_flutter/login_screen.dart';
 class PersonalInformationScreen  extends StatefulWidget
 {
+  static const String screenRoute = 'personalinformation_screen';
   @override
   State<PersonalInformationScreen> createState() => _PersonalInformationScreenState();
 }
-
 class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   var FirstNameController  = TextEditingController();
   var LastNameController = TextEditingController();
@@ -14,22 +16,28 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   var ConfirmPasswordController = TextEditingController();
   var DateOfBirthController = TextEditingController();
   var AddressController = TextEditingController();
+
   bool Male = false;
   bool Female = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF3E3B3B),
+      backgroundColor: Color(0xFF2c363b),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: Icon(
-            Icons.keyboard_backspace,
-            color: Colors.orangeAccent),
-        title: Text(
-          'Personal Information',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+        backgroundColor:Colors.transparent,
+        title:const Text(
+            'Personal Information',
+           style: TextStyle(
+          fontWeight: FontWeight.bold,
+           ),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+          color: Color(0xFFffae46),),
+          onPressed: (){
+            Navigator.pushNamed(context, LoginScreen.screenRoute);
+          },
         ),
       ),
       body:SingleChildScrollView(
@@ -248,33 +256,6 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
               SizedBox(
                 height: 15.0,
               ),
-              Row(
-                children: [
-                  Text('Male'),
-                  Checkbox(
-                    activeColor: Colors.orangeAccent,
-                      checkColor: Colors.white,
-                      value: Male,
-                      onChanged: (value) {
-                      setState(() {
-                        Male= value!;
-                      });
-                  }),
-                  SizedBox(
-                    width: 150.0,
-                  ),
-                  Text('Female'),
-                  Checkbox(
-                      activeColor: Colors.orangeAccent,
-                      checkColor: Colors.white,
-                      value: Female,
-                      onChanged: (value) {
-                        setState(() {
-                          Female= value!;
-                        });
-                          }),
-                ],
-              ),
               TextFormField(
                 controller: AddressController,
                 onChanged: (String value)
@@ -302,11 +283,65 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 ),
               ),
               SizedBox(
-                height: 40.0,
+                height: 15.0,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Gender',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Male',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Checkbox(
+                      activeColor: Colors.orangeAccent,
+                      checkColor: Colors.white,
+                      value: Male,
+                      onChanged: (value) {
+                        setState(() {
+                          Male= value!;
+                        });
+                      }),
+                  SizedBox(
+                    width: 180.0,
+                  ),
+                  Text(
+                    'Female',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Checkbox(
+                      activeColor: Colors.orangeAccent,
+                      checkColor: Colors.white,
+                      value: Female,
+                      onChanged: (value) {
+                        setState(() {
+                          Female= value!;
+                        });
+                      }),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
               ),
               Container(
                 width: double.infinity,
-                color: Colors.orangeAccent,
+                color: Color(0xFFffae46),
                 child: MaterialButton(
                   onPressed: ()
                   {
@@ -318,6 +353,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                     print(ConfirmPasswordController.text);
                     print(DateOfBirthController.text);
                     print(AddressController.text);
+                    Navigator.pushNamed(context, MedicalInformationScreen.screenRoute);
                   },
                   child:Text(
                     'Next',

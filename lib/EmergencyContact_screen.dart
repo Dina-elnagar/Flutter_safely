@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-
-class EmergencyContactScreen extends StatefulWidget
-{
+import 'package:udemy_flutter/CarInformation_screen.dart';
+class EmergencyContactScreen extends StatefulWidget {
+  static const String screenRoute = 'emergencycontact_screen';
   @override
   State<EmergencyContactScreen> createState() => _EmergencyContactScreenState();
 }
-
 class _EmergencyContactScreenState extends State<EmergencyContactScreen> {
   var Contact1Controller = TextEditingController();
   var Contact2Controller = TextEditingController();
   var Contact3Controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF3E3B3B),
+      backgroundColor: Color(0xFF2c363b),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: Icon(
-          Icons.keyboard_backspace,
-          color: Colors.orangeAccent),
+        leading:IconButton(
+      icon: const Icon(
+      Icons.arrow_back,
+        color: Color(0xFFffae46),),
+      onPressed: (){
+        Navigator.pushNamed(context, CarInformationScreen.screenRoute);
+      },
+    ),
         title: Text('Emergency Contact',),
                     ),
       body: Padding(
@@ -108,15 +111,16 @@ class _EmergencyContactScreenState extends State<EmergencyContactScreen> {
             ),
             Container(
               width: double.infinity,
-              color: Colors.orangeAccent,
+              color: Color(0xFFffae46),
               child: MaterialButton(
                 onPressed: () {
                   print(Contact1Controller.text);
                   print(Contact2Controller.text);
                   print(Contact3Controller.text);
+
                 },
                 child: Text(
-                  'Finish',
+                  'Finsh',
                   style: TextStyle(
                     color: Colors.white,
                   ),

@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-class LoginScreen extends StatelessWidget {
+import 'package:udemy_flutter/personalinformaion_screen.dart';
+class LoginScreen extends StatefulWidget {
+
+ static const String screenRoute = 'login_screen';
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
 
   var EmailController  = TextEditingController();
   var passwordController = TextEditingController();
-
 
       @override
 
@@ -127,7 +135,9 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, PersonalInformationScreen.screenRoute);
+          },
           child: Text(
           'Register Now',
             style: TextStyle(
@@ -148,7 +158,7 @@ class LoginScreen extends StatelessWidget {
           ),
       );
       }
-  }
+}
 
 
 
