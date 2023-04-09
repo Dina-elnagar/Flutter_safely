@@ -5,6 +5,9 @@ import 'package:udemy_flutter/MedicalInformation_screen.dart';
 import 'package:udemy_flutter/login_screen.dart';
 import 'package:udemy_flutter/personalinformaion_screen.dart';
 import 'package:udemy_flutter/enabalelocation_screen.dart';
+import 'package:udemy_flutter/Screens/editprofile.dart';
+import 'package:udemy_flutter/Screens/homescreen.dart';
+import 'package:udemy_flutter/Screens/settings.dart';
 
 void main()
 {
