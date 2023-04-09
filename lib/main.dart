@@ -24,13 +24,17 @@ class MYAPP extends StatelessWidget
      debugShowCheckedModeBanner:false ,
      //home:EnableLocationScreen(),
        initialRoute:LoginScreen.screenRoute,
-     routes:{
-       LoginScreen.screenRoute:(context) => LoginScreen(),
-       PersonalInformationScreen.screenRoute:(context) => PersonalInformationScreen(),
-       MedicalInformationScreen.screenRoute:(context) => MedicalInformationScreen(),
-       CarInformationScreen.screenRoute:(context) =>CarInformationScreen(),
-       EmergencyContactScreen.screenRoute:(context) =>EmergencyContactScreen(),
-       EnableLocationScreen.screenRoute:(context) =>EnableLocationScreen(),
+     routes: {
+       LoginScreen.screenRoute: (context) => LoginScreen(),
+       PersonalInformationScreen.screenRoute: (context) =>
+           PersonalInformationScreen(),
+       MedicalInformationScreen.screenRoute: (context) =>
+           MedicalInformationScreen(),
+       CarInformationScreen.screenRoute: (context) => CarInformationScreen(),
+       EmergencyContactScreen.screenRoute: (context) =>
+           EmergencyContactScreen(),
+       EnableLocationScreen.screenRoute: (context) => EnableLocationScreen(),
+       HomeScreen.screenRoute: (context) =>HomeScreen(),
      }
      );
   }

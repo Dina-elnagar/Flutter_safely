@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/Screens/homescreen.dart';
 import 'package:udemy_flutter/personalinformaion_screen.dart';
 class LoginScreen extends StatefulWidget {
 
@@ -112,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
           {
           print(EmailController.text);
           print(passwordController.text);
+          Navigator.pushNamed(context, HomeScreen.screenRoute);
           },
           child:
           Text(
