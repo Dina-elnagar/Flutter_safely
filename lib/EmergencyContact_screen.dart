@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/CarInformation_screen.dart';
+import 'package:udemy_flutter/enabalelocation_screen.dart';
+
 class EmergencyContactScreen extends StatefulWidget {
   static const String screenRoute = 'emergencycontact_screen';
   @override
@@ -117,7 +119,7 @@ class _EmergencyContactScreenState extends State<EmergencyContactScreen> {
                   print(Contact1Controller.text);
                   print(Contact2Controller.text);
                   print(Contact3Controller.text);
-
+                  Navigator.pushNamed(context, EnableLocationScreen.screenRoute);
                 },
                 child: Text(
                   'Finsh',

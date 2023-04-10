@@ -8,6 +8,8 @@ import 'package:udemy_flutter/enabalelocation_screen.dart';
 import 'package:udemy_flutter/Screens/editprofile.dart';
 import 'package:udemy_flutter/Screens/homescreen.dart';
 import 'package:udemy_flutter/Screens/settings.dart';
+import 'Screens/car.dart';
+import 'Screens/contacts.dart';
 
 void main()
 {
@@ -22,7 +24,7 @@ class MYAPP extends StatelessWidget
   {
    return MaterialApp(
      debugShowCheckedModeBanner:false ,
-     //home:EnableLocationScreen(),
+     // home:EnableLocationScreen(),
        initialRoute:LoginScreen.screenRoute,
      routes: {
        LoginScreen.screenRoute: (context) => LoginScreen(),
@@ -35,6 +37,10 @@ class MYAPP extends StatelessWidget
            EmergencyContactScreen(),
        EnableLocationScreen.screenRoute: (context) => EnableLocationScreen(),
        HomeScreen.screenRoute: (context) =>HomeScreen(),
+       EditProfileUI.screenRoute: (context) =>  EditProfileUI(),
+       SettingsPage.screenRoute: (context) => SettingsPage(),
+       contactscreen.screenRoute: (context) => contactscreen(),
+       carscreen.screenRoute: (context) => carscreen(),
      }
      );
   }

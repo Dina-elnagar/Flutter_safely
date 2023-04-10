@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/Screens/homescreen.dart';
+
+
 class EnableLocationScreen extends StatelessWidget {
   static const String screenRoute= 'enabledlocation';
 
@@ -19,13 +22,20 @@ class EnableLocationScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Center(
-            child: SingleChildScrollView(child: Column(
+    child: Container(
+    width: double.infinity,
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10.0,),
+    color: const Color(0xFFffae46),
+    ),
+            child:
+            SingleChildScrollView(child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('Please Allow Location and Bluetooth services to continue using the app !',
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 40
+                      fontSize: 30
                   ),
                 ),
                 SizedBox(
@@ -41,6 +51,7 @@ class EnableLocationScreen extends StatelessWidget {
                     child: Text('Cancle',
                       style: TextStyle(
                         color: Colors.white,
+                          fontSize: 20
                       ),
                     ),
                   ),
@@ -51,10 +62,12 @@ class EnableLocationScreen extends StatelessWidget {
                     onPressed: ()
                     {
                       print (AllowController.text);
+                      Navigator.pushNamed(context, HomeScreen.screenRoute);
                     },
                     child: Text('Allow',
                       style: TextStyle(
                         color: Colors.white,
+                          fontSize: 20,
                       ),
                     ),
                   ),
@@ -74,7 +87,9 @@ class EnableLocationScreen extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
+
 
 
   }

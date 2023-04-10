@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/Screens/editprofile.dart';
 import 'package:udemy_flutter/Screens/settings.dart';
+import 'package:udemy_flutter/Screens/contacts.dart';
+import 'package:udemy_flutter/Screens/car.dart';
+
+
 
 class HomeScreen extends StatefulWidget {
   static const String screenRoute = 'HomeScreen';
@@ -134,26 +138,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: const Color(0xFFffae46),
                   ),
                   child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.person,
-                      size: 70.0,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.person,
+                        size: 70.0,
                         color: Colors.white,
                       ),
-                    ),
-                  ],
-                ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Text(
+                        'Profile',
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -165,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(13.0),
               child: GestureDetector(
                 onTap: () {
-                  //Navigator.pushNamed(context, carscreen.screenRoute);
+                  Navigator.pushNamed(context, carscreen.screenRoute);
                 },
                 child: Container(
                   width: double.infinity,
@@ -212,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: (){
                         setState(()
                         {
-                  // Navigator.pushNamed(context, Contacts.screenRoute);
+                          Navigator.pushNamed(context, contactscreen.screenRoute);
                         });
                       },
                       child: Container(
@@ -292,6 +296,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
 
-      );
+    );
   }
 }
