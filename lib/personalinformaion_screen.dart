@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/MedicalInformation_screen.dart';
+import 'package:udemy_flutter/Screens/homescreen.dart';
 import 'package:udemy_flutter/login_screen.dart';
+import 'package:http/http.dart'as http;
+import 'package:udemy_flutter/globals.dart';
+import 'package:udemy_flutter/auth_services.dart';
+import 'dart:convert';
+import 'login_screen.dart';
 class PersonalInformationScreen  extends StatefulWidget
 {
   static const String screenRoute = 'personalinformation_screen';
@@ -8,6 +14,16 @@ class PersonalInformationScreen  extends StatefulWidget
   State<PersonalInformationScreen> createState() => _PersonalInformationScreenState();
 }
 class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
+  String FirstName='';
+  String LastName='';
+  String PhoneNumber='';
+  String Email='';
+  String Password='';
+  String ConfirmPassword='';
+  String DateOfBirth='';
+  String Address='';
+  String Gender='';
+
   var FirstNameController  = TextEditingController();
   var LastNameController = TextEditingController();
   var PhoneNumberController = TextEditingController();
@@ -232,10 +248,6 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 },
                 decoration: InputDecoration(
                   labelText: 'Date Of Birth',
-                  suffixIcon: Icon(
-                    Icons.date_range_sharp,
-                    color: Colors.orangeAccent,
-                  ),
                   labelStyle: TextStyle(
                     color: Colors.white,
                   ),
@@ -286,6 +298,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 height: 15.0,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Gender',
@@ -343,18 +356,28 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 width: double.infinity,
                 color: Color(0xFFffae46),
                 child: MaterialButton(
-                  onPressed: ()
+                  onPressed: () async
                   {
-                    print(FirstNameController.text);
-                    print(LastNameController.text);
-                    print(PhoneNumberController.text);
-                    print(EmailController.text);
-                    print(PasswordController.text);
-                    print(ConfirmPasswordController.text);
-                    print(DateOfBirthController.text);
-                    print(AddressController.text);
-                    Navigator.pushNamed(context, MedicalInformationScreen.screenRoute);
-                  },
+                    bool emailValid =RegExp( r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(Email);
+                    if(emailValid){
+                      http.Response response = await AuthServices.personalinformation(FirstName, LastName, PhoneNumber, Email, Password, ConfirmPassword, DateOfBirth, Address,Gender,);
+                      Map responseMap = jsonDecode(response.body);
+                      if(response.statusCode==200){
+                        Navigator.pushNamed(context, MedicalInformationScreen.screenRoute);
+                      } else {errorSnackBar(context, responseMap.values.first[0]);}
+                      } else{errorSnackBar(context, 'email not valid');}
+                    },
+                   // print(FirstNameController.text);
+                   // print(LastNameController.text);
+                   // print(PhoneNumberController.text);
+                   // print(EmailController.text);
+                   // print(PasswordController.text);
+                   // print(ConfirmPasswordController.text);
+                   // print(DateOfBirthController.text);
+                  //  print(AddressController.text);
+                    //Navigator.pushNamed(context, MedicalInformationScreen.screenRoute);
+
                   child:Text(
                     'Next',
                     style: TextStyle(

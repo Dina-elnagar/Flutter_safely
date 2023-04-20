@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/Screens/homescreen.dart';
+import 'package:udemy_flutter/auth_services.dart';
+import 'package:udemy_flutter/globals.dart';
 import 'package:udemy_flutter/personalinformaion_screen.dart';
+import 'package:http/http.dart'as http;
 
 class LoginScreen extends StatefulWidget {
 
@@ -11,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String Email='';
+  String Password='';
 
   var EmailController  = TextEditingController();
   var passwordController = TextEditingController();
@@ -111,11 +117,23 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.orangeAccent,
           child: MaterialButton(
           onPressed: ()
-          {
-          print(EmailController.text);
-          print(passwordController.text);
-          Navigator.pushNamed(context, HomeScreen.screenRoute);
+          async{
+            if(Email.isNotEmpty && Password.isNotEmpty){
+              http.Response response = await AuthServices.login(Email, Password);
+              Map responseMap = jsonDecode(response.body);
+              if(response.statusCode==200){
+                Navigator.pushNamed(context, HomeScreen.screenRoute);
+              }else{
+                errorSnackBar(context, responseMap.values.first);
+              }
+            }else{
+              errorSnackBar(context, 'enter all required fields');
+            }
           },
+
+             // print(EmailController.text);
+             // print(passwordController.text);
+             // Navigator.pushNamed(context, HomeScreen.screenRoute);
           child:
           Text(
           'Sign In',
