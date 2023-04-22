@@ -16,8 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String email='';
-  String _Password='';
-
+  String Password='';
 
 
   var EmailController  = TextEditingController();
@@ -58,8 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
           controller: EmailController,
           onChanged: (String value)
           {
-          print(value);
 
+            email = value;
           },
           decoration: InputDecoration(
           labelText: 'Email',
@@ -89,8 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
           obscureText: true,
           onChanged: (String value)
           {
-          print(value);
 
+            Password = value;
           },
           decoration: InputDecoration(
           labelText: 'Password',
@@ -114,21 +113,24 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(
           height: 20.0,
           ),
+
           Container(
           width: double.infinity,
           color: Colors.orangeAccent,
           child: MaterialButton(
-          onPressed: ()
+            onPressed: ()
           async{
-            if(email.isNotEmpty && _Password.isNotEmpty){
-              http.Response response = await AuthServices.login(email, _Password);
+            if(email.isNotEmpty && Password.isNotEmpty){
+              http.Response response = await AuthServices.login(email, Password);
               Map responseMap = jsonDecode(response.body);
               if(response.statusCode==200){
                 Navigator.pushNamed(context, HomeScreen.screenRoute);
-              }else{
+              }
+              else{
                 errorSnackBar(context, responseMap.values.first);
               }
-            }else{
+             }
+            else{
               errorSnackBar(context, 'enter all required fields');
             }
           },

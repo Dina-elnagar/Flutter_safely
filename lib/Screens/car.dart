@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/Screens/homescreen.dart';
+import 'package:udemy_flutter/auth_services.dart';
+import 'package:udemy_flutter/globals.dart';
+import 'package:http/http.dart' as http;
 
 
 class carscreen extends StatefulWidget {
@@ -11,12 +15,56 @@ class carscreen extends StatefulWidget {
 }
 
 class _carscreen extends State<carscreen> {
+  String _carmodel = '';
+  String _carcolor = '';
+  String _platenumber = '';
   TextEditingController carmodelController = TextEditingController();
   TextEditingController carcolorController = TextEditingController();
   TextEditingController platenumberController = TextEditingController();
   List<Car> cars = List.empty(growable: true);
 
   int selectedIndex = -1;
+
+
+  addcardataPressed() async {
+    if (_carmodel.isNotEmpty && _carcolor.isNotEmpty && _platenumber.isNotEmpty) {
+      http.Response response = await AuthServices.addcardataPressed(_carmodel,_carcolor,_platenumber);
+      Map responseMap = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (BuildContext context) => const HomeScreen(),
+        //     ));
+      } else {
+        errorSnackBar(context, responseMap.values.first);
+      }
+    } else {
+      errorSnackBar(context, 'enter all required fields');
+    }
+  }
+
+
+  updatecardataPressed() async {
+    if (_carmodel.isNotEmpty && _carcolor.isNotEmpty && _platenumber.isNotEmpty) {
+      http.Response response = await AuthServices.updatecardataPressed(_carmodel,_carcolor,_platenumber);
+      Map responseMap = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (BuildContext context) => const HomeScreen(),
+        //     ));
+      } else {
+        errorSnackBar(context, responseMap.values.first);
+      }
+    } else {
+      errorSnackBar(context, 'enter all required fields');
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +101,9 @@ class _carscreen extends State<carscreen> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ))),
+              onChanged: (value) {
+                _carmodel = value;
+              },
             ),
             const SizedBox(height: 10),
             TextField(
@@ -68,6 +119,9 @@ class _carscreen extends State<carscreen> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ))),
+              onChanged: (value) {
+                _carcolor = value;
+              },
             ),
             TextField(
               controller: platenumberController,
@@ -80,6 +134,9 @@ class _carscreen extends State<carscreen> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ))),
+              onChanged: (value) {
+                _platenumber = value;
+              },
             ),
             const SizedBox(height: 10),
             Row(
@@ -88,6 +145,7 @@ class _carscreen extends State<carscreen> {
                 ElevatedButton(
                     onPressed: () {
                       //
+                      addcardataPressed();
                       String carmodel = carmodelController.text.trim();
                       String carcolor = carcolorController.text.trim();
                       String platenumber = platenumberController.text.trim();
@@ -107,6 +165,7 @@ class _carscreen extends State<carscreen> {
                 ElevatedButton(
                     onPressed: () {
                       //
+                      updatecardataPressed();
                       String carmodel = carmodelController.text.trim();
                       String carcolor = carcolorController.text.trim();
                       String platenumber = platenumberController.text.trim();
@@ -211,4 +270,3 @@ class Car {
   String platenumber;
   Car({required this.carmodel, required this.carcolor, required this.platenumber});
 }
-
