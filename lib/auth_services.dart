@@ -18,7 +18,7 @@ class AuthServices{
       'Address':Address,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL+'auth/personalinformation');
+    var url = Uri.parse(baseURL+'Register');
     http.Response response = await http.post(
       url,
       headers: headers,
@@ -33,7 +33,7 @@ class AuthServices{
       "password": password,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'auth/login');
+    var url = Uri.parse(baseURL + 'userLogin');
     http.Response response = await http.post(
       url,
       headers: headers,

@@ -15,8 +15,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String Email='';
-  String Password='';
+  String email='';
+  String _Password='';
+
+
 
   var EmailController  = TextEditingController();
   var passwordController = TextEditingController();
@@ -118,8 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: MaterialButton(
           onPressed: ()
           async{
-            if(Email.isNotEmpty && Password.isNotEmpty){
-              http.Response response = await AuthServices.login(Email, Password);
+            if(email.isNotEmpty && _Password.isNotEmpty){
+              http.Response response = await AuthServices.login(email, _Password);
               Map responseMap = jsonDecode(response.body);
               if(response.statusCode==200){
                 Navigator.pushNamed(context, HomeScreen.screenRoute);
