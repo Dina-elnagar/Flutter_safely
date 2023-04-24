@@ -16,6 +16,7 @@ class AuthServices{
       'ConfirmPassword':ConfirmPassword,
       'DateOfBirth':DateOfBirth,
       'Address':Address,
+      'Gender':Gender,
     };
     var body = json.encode(data);
     var url = Uri.parse(baseURL+'auth/personalinformation');
@@ -34,6 +35,21 @@ class AuthServices{
     };
     var body = json.encode(data);
     var url = Uri.parse(baseURL + 'auth/login');
+    http.Response response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+    print(response.body);
+    return response;
+  }
+  static Future<http.Response> MedicallInformation(String BloodType, String HealthProblems, bool Yes ,bool No, bool yes, bool no) async {
+    Map data = {
+      "BloodType": BloodType,
+      "HealthProblems": HealthProblems,
+    };
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + 'auth/MedicalInformation');
     http.Response response = await http.post(
       url,
       headers: headers,

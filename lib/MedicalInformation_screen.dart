@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/CarInformation_screen.dart';
 import 'package:udemy_flutter/personalinformaion_screen.dart';
+import 'package:udemy_flutter/auth_services.dart';
+import 'package:udemy_flutter/globals.dart';
+import 'package:http/http.dart'as http;
+
 class MedicalInformationScreen extends StatefulWidget {
   static const String screenRoute = 'medicalinformation_screen';
   @override
@@ -9,6 +15,8 @@ class MedicalInformationScreen extends StatefulWidget {
   }
   class _MedicalInformationScreenState extends State<MedicalInformationScreen>
   {
+    String BloodType ='';
+    String HealthProblems ='';
       bool Yes = false;
       bool No = false;
       bool yes = false;
@@ -203,12 +211,23 @@ class MedicalInformationScreen extends StatefulWidget {
             width: double.infinity,
             color: Color(0xFFffae46),
             child: MaterialButton(
-              onPressed: ()
-              {
-                print(BloodTypeController.text);
-                print(HealthProblemsController.text);
-                Navigator.pushNamed(context, CarInformationScreen.screenRoute);
+              onPressed: () async {
+               if(BloodType.isNotEmpty && HealthProblems.isNotEmpty){
+                 http.Response response= await AuthServices.MedicallInformation(BloodType, HealthProblems, Yes, No, yes, no);
+                 Map responseMap = jsonDecode(response.body);
+                    if(response.statusCode==200){
+                    Navigator.pushNamed(context, CarInformationScreen.screenRoute);
+                 }else{
+               errorSnackBar(context, responseMap.values.first);
+               }
+               }else{
+                  errorSnackBar(context, 'enter all required fields');
+               }
               },
+                //print(BloodTypeController.text);
+              //print(HealthProblemsController.text)
+              //Navigator.pushNamed(context, CarInformationScreen.screenRoute);
+
               child:Text(
                 'Next',
                 style: TextStyle(
