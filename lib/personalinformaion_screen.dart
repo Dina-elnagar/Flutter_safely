@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/MedicalInformation_screen.dart';
-import 'package:udemy_flutter/Screens/homescreen.dart';
 import 'package:udemy_flutter/login_screen.dart';
 import 'package:http/http.dart'as http;
 import 'package:udemy_flutter/globals.dart';
 import 'package:udemy_flutter/auth_services.dart';
 import 'dart:convert';
-import 'login_screen.dart';
 class PersonalInformationScreen  extends StatefulWidget
 {
   static const String screenRoute = 'personalinformation_screen';
@@ -65,7 +63,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
               controller: FirstNameController,
               onChanged: (String value)
               {
-                print(value);
+                FirstName = value;
 
               },
               decoration: InputDecoration(
@@ -94,7 +92,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 controller: LastNameController,
                 onChanged: (String value)
                 {
-                  print(value);
+                  LastName = value;
 
                 },
                 decoration: InputDecoration(
@@ -123,7 +121,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 controller: PhoneNumberController,
                 onChanged: (String value)
                 {
-                  print(value);
+                  PhoneNumber = value;
 
                 },
                 decoration: InputDecoration(
@@ -152,7 +150,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 controller: EmailController,
                 onChanged: (String value)
                 {
-                  print(value);
+                  Email = value;
 
                 },
                 decoration: InputDecoration(
@@ -183,7 +181,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 obscureText: true,
                 onChanged: (String value)
                 {
-                  print(value);
+                  Password = value;
 
                 },
                 decoration: InputDecoration(
@@ -214,7 +212,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 obscureText: true,
                 onChanged: (String value)
                 {
-                  print(value);
+                  ConfirmPassword = value;
 
                 },
                 decoration: InputDecoration(
@@ -243,7 +241,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 controller: DateOfBirthController,
                 onChanged: (String value)
                 {
-                  print(value);
+                  DateOfBirth = value;
 
                 },
                 decoration: InputDecoration(
@@ -272,7 +270,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 controller: AddressController,
                 onChanged: (String value)
                 {
-                  print(value);
+                  Address = value;
 
                 },
                 decoration: InputDecoration(
