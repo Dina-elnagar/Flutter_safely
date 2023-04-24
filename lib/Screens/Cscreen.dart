@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
-
+void main ()
+{
+  runApp(Ascreen());
+}
 class Ascreen extends StatelessWidget {
 
   Widget build(BuildContext context)
