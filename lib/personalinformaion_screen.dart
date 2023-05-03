@@ -358,13 +358,13 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   {
                     bool emailValid =RegExp( r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(Email);
-                    if(emailValid){
-                      http.Response response = await AuthServices.personalinformation(FirstName, LastName, PhoneNumber, Email, Password, ConfirmPassword, DateOfBirth, Address,Gender,);
-                      Map responseMap = jsonDecode(response.body);
-                      if(response.statusCode==200){
-                        Navigator.pushNamed(context, MedicalInformationScreen.screenRoute);
-                      } else {errorSnackBar(context, responseMap.values.first[0]);}
-                      } else{errorSnackBar(context, 'email not valid');}
+                    // if(emailValid){
+                    //   http.Response response = await AuthServices.addData(FirstName, LastName, PhoneNumber, Email, Password, ConfirmPassword, DateOfBirth, Address,Gender,);
+                    //   Map responseMap = jsonDecode(response.body);
+                    //   if(response.statusCode==200){
+                    //     Navigator.pushNamed(context, MedicalInformationScreen.screenRoute);
+                    //   } else {errorSnackBar(context, responseMap.values.first[0]);}
+                    //   } else{errorSnackBar(context, 'email not valid');}
                     },
                    // print(FirstNameController.text);
                    // print(LastNameController.text);

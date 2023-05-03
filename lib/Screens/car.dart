@@ -1,67 +1,86 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/Screens/homescreen.dart';
 import 'package:udemy_flutter/auth_services.dart';
 import 'package:udemy_flutter/globals.dart';
 import 'package:http/http.dart' as http;
 
 
+
+
 class carscreen extends StatefulWidget {
-  const carscreen({Key? key}) : super(key: key);
+
+  // const carscreen({Key? key , required this.title}) : super(key: key);
   static const String screenRoute = 'carscreen';
+  // final String title;
+
+  // List list;
+  // int index;
+  // carscreen({required this.index , required this.list, required this.title}) ;
+
 
   @override
   State<carscreen> createState() => _carscreen();
 }
 
 class _carscreen extends State<carscreen> {
-  String _carmodel = '';
-  String _carcolor = '';
-  String _platenumber = '';
-  TextEditingController carmodelController = TextEditingController();
+  //DatabaseHelper databaseHelper =  addcarData();
+  final auth = AuthServices();
+  // String _carmodel = '';
+  // String _carcolor = '';
+  // String _platenumber = '';
+  TextEditingController carmodelController =  TextEditingController();
   TextEditingController carcolorController = TextEditingController();
-  TextEditingController platenumberController = TextEditingController();
+  TextEditingController platenumberController =  TextEditingController();
   List<Car> cars = List.empty(growable: true);
 
   int selectedIndex = -1;
 
 
-  addcardataPressed() async {
-    if (_carmodel.isNotEmpty && _carcolor.isNotEmpty && _platenumber.isNotEmpty) {
-      http.Response response = await AuthServices.addcardataPressed(_carmodel,_carcolor,_platenumber);
-      Map responseMap = jsonDecode(response.body);
-      if (response.statusCode == 200) {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (BuildContext context) => const HomeScreen(),
-        //     ));
-      } else {
-        errorSnackBar(context, responseMap.values.first);
-      }
-    } else {
-      errorSnackBar(context, 'enter all required fields');
-    }
-  }
+  @override
+  // void initState(){
+  //   carmodelController = new TextEditingController(text: widget.list[widget.index]['carmodel']);
+  //   carcolorController = new TextEditingController(text: widget.list[widget.index]['carcolor']);
+  //   platenumberController = new TextEditingController(text: widget.list[widget.index]['platenumber']);
+  // }
 
-
-  updatecardataPressed() async {
-    if (_carmodel.isNotEmpty && _carcolor.isNotEmpty && _platenumber.isNotEmpty) {
-      http.Response response = await AuthServices.updatecardataPressed(_carmodel,_carcolor,_platenumber);
-      Map responseMap = jsonDecode(response.body);
-      if (response.statusCode == 200) {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (BuildContext context) => const HomeScreen(),
-        //     ));
-      } else {
-        errorSnackBar(context, responseMap.values.first);
-      }
-    } else {
-      errorSnackBar(context, 'enter all required fields');
-    }
-  }
+  // addcardataPressed() async {
+  //   if (_carmodel.isNotEmpty && _carcolor.isNotEmpty && _platenumber.isNotEmpty) {
+  //     http.Response response = await AuthServices.post(_carmodel,_carcolor,_platenumber);
+  //     Map responseMap = jsonDecode(response.body);
+  //     if (response.statusCode == 200) {
+  //       // Navigator.push(
+  //       //     context,
+  //       //     MaterialPageRoute(
+  //       //       builder: (BuildContext context) => const HomeScreen(),
+  //       //     ));
+  //     } else {
+  //       errorSnackBar(context, responseMap.values.first);
+  //     }
+  //   } else {
+  //     errorSnackBar(context, 'enter all required fields');
+  //   }
+  // }
+  //
+  //
+  // updatecardataPressed() async {
+  //   if (_carmodel.isNotEmpty && _carcolor.isNotEmpty && _platenumber.isNotEmpty) {
+  //     http.Response response = await AuthServices.put2(_carmodel,_carcolor,_platenumber);
+  //     Map responseMap = jsonDecode(response.body);
+  //     if (response.statusCode == 200) {
+  //       // Navigator.push(
+  //       //     context,
+  //       //     MaterialPageRoute(
+  //       //       builder: (BuildContext context) => const HomeScreen(),
+  //       //     ));
+  //     } else {
+  //       errorSnackBar(context, responseMap.values.first);
+  //     }
+  //   } else {
+  //     errorSnackBar(context, 'enter all required fields');
+  //   }
+  // }
 
 
 
@@ -101,14 +120,15 @@ class _carscreen extends State<carscreen> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ))),
-              onChanged: (value) {
-                _carmodel = value;
-              },
+
+              // onChanged: (value) {
+              //   _carmodel = value;
+              // },
             ),
             const SizedBox(height: 10),
             TextField(
               controller: carcolorController,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
               maxLength: 10,
               decoration: const InputDecoration(
                   hintText: 'Car color',
@@ -119,9 +139,9 @@ class _carscreen extends State<carscreen> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ))),
-              onChanged: (value) {
-                _carcolor = value;
-              },
+              // onChanged: (value) {
+              //   _carcolor = value;
+              // },
             ),
             TextField(
               controller: platenumberController,
@@ -134,9 +154,9 @@ class _carscreen extends State<carscreen> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ))),
-              onChanged: (value) {
-                _platenumber = value;
-              },
+              // onChanged: (value) {
+              //   _platenumber = value;
+              // },
             ),
             const SizedBox(height: 10),
             Row(
@@ -144,17 +164,19 @@ class _carscreen extends State<carscreen> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      //
-                      addcardataPressed();
-                      String carmodel = carmodelController.text.trim();
-                      String carcolor = carcolorController.text.trim();
-                      String platenumber = platenumberController.text.trim();
-                      if (carmodel.isNotEmpty && carcolor.isNotEmpty) {
+                      auth.addcarData(
+                        carmodelController.text.trim(), carcolorController.text.trim(),
+                        platenumberController.text.trim(),);
+                      //addcardataPressed();
+                      String model = carmodelController.text.trim();
+                      String color = carcolorController.text.trim();
+                      String plate_NO = platenumberController.text.trim();
+                      if (model.isNotEmpty && color.isNotEmpty) {
                         setState(() {
                           carmodelController.text = '';
                           carcolorController.text = '';
                           platenumberController.text = '';
-                          cars.add(Car(carmodel: carmodel, carcolor: carcolor, platenumber: platenumber));
+                          cars.add(Car(model: model, color: color, plate_NO: plate_NO));
                         });
                       }
                       //
@@ -163,20 +185,22 @@ class _carscreen extends State<carscreen> {
                       backgroundColor: const Color(0xFFffae46),),
                     child: const Text('Save')),
                 ElevatedButton(
-                    onPressed: () {
-                      //
-                      updatecardataPressed();
-                      String carmodel = carmodelController.text.trim();
-                      String carcolor = carcolorController.text.trim();
-                      String platenumber = platenumberController.text.trim();
-                      if (carmodel.isNotEmpty && carcolor.isNotEmpty && platenumber.isNotEmpty) {
+                     onPressed: () {
+                       auth.editcarData(
+                        carmodelController.text.trim(), carcolorController.text.trim(),
+                        platenumberController.text.trim(),);
+                      //updatecardataPressed();
+                      String model = carmodelController.text.trim();
+                      String color = carcolorController.text.trim();
+                      String plate_NO = platenumberController.text.trim();
+                      if (model.isNotEmpty && color.isNotEmpty && plate_NO.isNotEmpty) {
                         setState(() {
                           carmodelController.text = '';
                           carcolorController.text = '';
                           platenumberController.text = '';
-                          cars[selectedIndex].carmodel = carmodel;
-                          cars[selectedIndex].carcolor = carcolor;
-                          cars[selectedIndex].platenumber = platenumber;
+                          cars[selectedIndex].model = model;
+                          cars[selectedIndex].color = color;
+                          cars[selectedIndex].plate_NO = plate_NO;
                           selectedIndex = -1;
                         });
                       }
@@ -214,7 +238,7 @@ class _carscreen extends State<carscreen> {
           index % 2 == 0 ? Colors.deepPurpleAccent : Colors.purple,
           foregroundColor: Colors.white,
           child: Text(
-            cars[index].carmodel[0],
+            cars[index].model[0],
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -223,12 +247,12 @@ class _carscreen extends State<carscreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              cars[index].carmodel,
+              cars[index].model,
               style:
               const TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(cars[index].carcolor),
-            Text(cars[index].platenumber),
+            Text(cars[index].color),
+            Text(cars[index].plate_NO),
           ],
         ),
 
@@ -239,9 +263,9 @@ class _carscreen extends State<carscreen> {
               InkWell(
                   onTap: () {
                     //
-                    carmodelController.text = cars[index].carmodel;
-                    carcolorController.text = cars[index].carcolor;
-                    platenumberController.text = cars[index].platenumber;
+                    carmodelController.text = cars[index].model;
+                    carcolorController.text = cars[index].color;
+                    platenumberController.text = cars[index].plate_NO;
                     setState(() {
                       selectedIndex = index;
                     });
@@ -265,8 +289,8 @@ class _carscreen extends State<carscreen> {
   }
 }
 class Car {
-  String carmodel;
-  String carcolor;
-  String platenumber;
-  Car({required this.carmodel, required this.carcolor, required this.platenumber});
+  String model;
+  String color;
+  String plate_NO;
+  Car({required this.model, required this.color, required this.plate_NO});
 }

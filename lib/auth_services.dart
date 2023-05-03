@@ -1,127 +1,149 @@
+import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:html';
-import 'package:http/http.dart'as http;
-import 'package:udemy_flutter/globals.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthServices{
-  //tasneem work
-  static Future<http.Response> personalinformation(
-      String first_name, String last_name, String phone_number, String email, String password, String confirm_password, String date_of_birth, String  Address, String gender,
-      ) async{
-    Map data = {
-      'FirstName':first_name,
-      'LastName':last_name,
-      'PhoneNumber':phone_number,
-      'Email':email,
-      'Password':password,
-      'ConfirmPassword':confirm_password,
-      'DateOfBirth':date_of_birth,
-      'Address':Address,
-      'Gender':gender,
-    };
-    var body = json.encode(data);
-    var url = Uri.parse(baseURL+'Register');
-    http.Response response = await http.post(
-      url,
-      headers: headers,
-      body: body,
-    );
-    print(response.body);
-    return response;
-  }
-  //tasneem work
+class AuthServices {
 
-  static Future<http.Response> login(String email, String password,) async {
-    Map data = {
-      "email": email,
-      "password": password,
-    };
-    var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'userLogin');
-    http.Response response = await http.post(
-      url,
-      headers: headers,
-      body: body,
-    );
-    print(response.body);
-    return response;
-  }
-  //tasneem work
+  var ServerUrl = "http://flutterapitutorial.codeforiraq.org/api";
+  var status;
+  var token;
 
-  static Future<http.Response> MedicallInformation(String blood_type, String blood_pressure, bool Yes ,bool No, bool yes, bool no) async {
-    Map data = {
-      "BloodType": blood_type,
-      "HealthProblems": blood_pressure,
-    };
-    var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'Register');
-    http.Response response = await http.post(
-      url,
-      headers: headers,
-      body: body,
-    );
-    print(response.body);
-    return response;
+  loginData(String email, String password) async {
+    final response = await http.post(
+        Uri.parse('http://127.0.0.1:8000/api/userLogin'),
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: {
+          "email": "$email",
+          "password": "$password"
+        });
+    status = response.body.contains('error');
+
+    var data = json.decode(response.body);
+
+    if (status) {
+      print('data : ${data["error"]}');
+    } else {
+      print('data : ${data["access_token"]}');
+      save(data["access_token"]);
     }
-  //amr work
-
-  static Future<http.Response> put(String first_name,String last_name,
-      String another_health_problem, String address) async {
-    Map data = {
-      "firstname" : first_name,
-      "lastname" : last_name,
-      "healthproblems": another_health_problem,
-      "address": address,
-    };
-    var body = json.encode(data);
-    var url = Uri.parse(editprofileURL );
-    http.Response response = await http.put(
-      url,
-      headers: editprofileheaders,
-      body: body,
-    );
-    print(response.body);
-    return response;
   }
-  //amr work
 
-  static Future<http.Response> addcardataPressed(String model,String color,String plate_NO) async {
-    Map data = {
-      "carmodel" : model,
-      "carcolor" : color,
-      "platenumber": plate_NO,
-    };
-    var body = json.encode(data);
-    var url = Uri.parse(addcarURL + 'CarStore');
-    http.Response response = await http.post(
-      url,
-      headers: addcarheaders,
-      body: body,
-    );
-    print(response.body);
-    return response;
+
+    String serverUrl = 'http://127.0.0.1:8000/api/';
+  registerData(String firstname, String lastname, String phonenumber,
+      String email, String password, String confirmpassword, String dateofbirth,
+      String address, String gender,) async {
+    String myUrl = "http://127.0.0.1:8000/api/Register";
+    final response = await http.post(myUrl as Uri,
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: {
+          "firstname": "$firstname",
+          "lastname": "$lastname",
+          "phonenumber": "$phonenumber",
+          "email": "$email",
+          "password": "$password",
+          "confirmpassword": "$confirmpassword",
+          "dateofbirth": "$dateofbirth",
+          "adderss": "$address",
+          "gender": "$gender",
+        });
+    status = response.body.contains('error');
+
+    var data = json.decode(response.body);
+
+    if (status) {
+      print('data : ${data["error"]}');
+    } else {
+      print('data : ${data["token"]}');
+      save(data["token"]);
+    }
   }
-   //amr work didin't work
-  static post(String model, String color, String plate_NO){}
 
-  static Future<http.Response> updatecardataPressed(String model,String color,String plate_NO) async {
-    Map data = {
-      "carmodel" : model,
-      "carcolor" : color,
-      "platenumber": plate_NO,
-    };
-    var body = json.encode(data);
-    var url = Uri.parse(updatecarURL + 'CarUpdate');
-    http.Response response = await http.put(
-      url,
-      headers: updatecarheaders,
-      body: body,
-    );
-    print(response.body);
-    return response;
+  Future<List> getData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'access_token';
+    final value = prefs.get(key) ?? 0;
+    http.Response response = await http.get(Uri.parse('http://127.0.0.1:8000/api/carShow'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $value'
+        });
+    return json.decode(response.body);
   }
-  static put2(String model, String color, String plate_NO){}
+
+  void deleteData(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.get(key) ?? 0;
+
+    String myUrl = "$serverUrl/carDelete/$id";
+    http.delete(myUrl as Uri,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $value'
+        }).then((response) {
+      print('Response status : ${response.statusCode}');
+      print('Response body : ${response.body}');
+    });
+  }
 
 
 
+  Future <void> editcarData(String model , String color,String plate_NO ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'access_token';
+    final value = prefs.get(key) ?? 0;
+
+    http.put(Uri.parse('http://127.0.0.1:8000/api/CarUpdate'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $value'
+        },
+        body: {
+          "model": "$model",
+          "color": "$color",
+          "plate_NO": "$plate_NO"
+        }).then((response) {
+      print('Response status : ${response.statusCode}');
+      print('Response body : ${response.body}');
+    });
+  }
+
+  Future <void> addcarData(String model , String color, String plate_NO, [String? trim]) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'access_token';
+    final value = prefs.get(key);
+    http.post(Uri.parse('http://127.0.0.1:8000/api/CarStore'),
+        headers: {
+          'Accept':'application/json',
+          'Authorization' : 'Bearer $value'
+        },
+        body: {
+          "model": "$model",
+          "color" : "$color",
+          "plate_NO" : "$plate_NO"
+        }
+    ).then((response){
+      print('Response status : ${response.statusCode}');
+      print('Response body : ${response.body}');
+    });
+  }
+
+  save(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'access_token';
+    final value = token;
+    prefs.setString(key, value);
+  }
+
+  read() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'access_token';
+    final value = prefs.get(key) ?? 0;
+    print('read : $value');
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/Screens/editprofile.dart';
 import 'package:udemy_flutter/Screens/settings.dart';
 import 'package:udemy_flutter/Screens/contacts.dart';
@@ -16,7 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool isMale = true;
 
-
+  _save(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = token;
+    prefs.setString(key, value);
+  }
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -169,6 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(13.0),
               child: GestureDetector(
                 onTap: () {
+                  _save('0');
                   Navigator.pushNamed(context, carscreen.screenRoute);
                 },
                 child: Container(

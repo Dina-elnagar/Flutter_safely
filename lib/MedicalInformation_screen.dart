@@ -212,17 +212,17 @@ class MedicalInformationScreen extends StatefulWidget {
             color: Color(0xFFffae46),
             child: MaterialButton(
               onPressed: () async {
-               if(BloodType.isNotEmpty && HealthProblems.isNotEmpty){
-                 http.Response response= await AuthServices.MedicallInformation(BloodType, HealthProblems, Yes, No, yes, no);
-                 Map responseMap = jsonDecode(response.body);
-                    if(response.statusCode==200){
-                    Navigator.pushNamed(context, CarInformationScreen.screenRoute);
-                 }else{
-               errorSnackBar(context, responseMap.values.first);
-               }
-               }else{
-                  errorSnackBar(context, 'enter all required fields');
-               }
+               // if(BloodType.isNotEmpty && HealthProblems.isNotEmpty){
+               // //  http.Response response= await AuthServices.addData(BloodType, HealthProblems, Yes, No, yes, no);
+               // //   Map responseMap = jsonDecode(response.body);
+               // //      if(response.statusCode==200){
+               // //      Navigator.pushNamed(context, CarInformationScreen.screenRoute);
+               //   }else{
+               // errorSnackBar(context, responseMap.values.first);
+               // }
+               // }else{
+               //    errorSnackBar(context, 'enter all required fields');
+               // }
               },
                 //print(BloodTypeController.text);
               //print(HealthProblemsController.text)

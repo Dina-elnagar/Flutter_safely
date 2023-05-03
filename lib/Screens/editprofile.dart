@@ -356,24 +356,24 @@ class _EditProfileUIState extends State<EditProfileUI> {
   String _healthproblems = '';
   String _address = '';
 
-  updatedataPressed() async {
-    if (_firstname.isNotEmpty && _lastname.isNotEmpty
-        && _healthproblems.isNotEmpty && _address.isNotEmpty) {
-      http.Response response = await AuthServices.put(_firstname,_lastname, _healthproblems, _address);
-      Map responseMap = jsonDecode(response.body);
-      if (response.statusCode == 200) {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (BuildContext context) => const HomeScreen(),
-        //     ));
-      } else {
-        errorSnackBar(context, responseMap.values.first);
-      }
-    } else {
-      errorSnackBar(context, 'enter all required fields');
-    }
-  }
+  // updatedataPressed() async {
+  //   if (_firstname.isNotEmpty && _lastname.isNotEmpty
+  //       && _healthproblems.isNotEmpty && _address.isNotEmpty) {
+  //     http.Response response = await AuthServices.put(_firstname,_lastname, _healthproblems, _address);
+  //     Map responseMap = jsonDecode(response.body);
+  //     if (response.statusCode == 200) {
+  //       // Navigator.push(
+  //       //     context,
+  //       //     MaterialPageRoute(
+  //       //       builder: (BuildContext context) => const HomeScreen(),
+  //       //     ));
+  //     } else {
+  //       errorSnackBar(context, responseMap.values.first);
+  //     }
+  //   } else {
+  //     errorSnackBar(context, 'enter all required fields');
+  //   }
+  // }
 
 
 
@@ -546,7 +546,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
                       // ),
 
                       ElevatedButton(
-                        onPressed: updatedataPressed,
+                        onPressed:() async {},   //updatedataPressed,
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFffae46),
                             padding: const EdgeInsets.symmetric(horizontal: 50),
