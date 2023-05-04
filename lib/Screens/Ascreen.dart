@@ -91,7 +91,7 @@ class Ascreen extends StatelessWidget {
 
                           child:ElevatedButton(onPressed: ()
                             {
-                              var push = Navigator.push
+                                Navigator.push
                                 (context, MaterialPageRoute(
                                   builder: (context) => HomeScreen(),
                               ),
