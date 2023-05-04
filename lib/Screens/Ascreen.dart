@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Cscreen.dart';
 import 'homescreen.dart';
 
+
 class Ascreen extends StatelessWidget {
 
 
@@ -34,30 +35,30 @@ class Ascreen extends StatelessWidget {
                     child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Are you Ok?',
+                      const Text('Are you Ok?',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                       ),
-                      Text('Our sensors detected unusual speed and stop,'
+                      const Text('Our sensors detected unusual speed and stop,'
                           '  we just want to make sure everything is ok.',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20.0,
                       ),
 
                       Row (children: [
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child:Container(
+                          child:SizedBox(
                             width: 200,
                             height: 40,
                             
@@ -71,10 +72,10 @@ class Ascreen extends StatelessWidget {
 
                             },
                               style:ElevatedButton.styleFrom(
-                                primary: Colors.red,
+                                backgroundColor: Colors.red,
                                                             ),
 
-                              child: Text('Call Emergency',
+                              child: const Text('Call Emergency',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -83,7 +84,7 @@ class Ascreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width:100 ,
                           height:40,
 
@@ -97,10 +98,10 @@ class Ascreen extends StatelessWidget {
                               );
                             },
                             style:ElevatedButton.styleFrom(
-                                primary: Colors.green,
+                                backgroundColor: Colors.green,
 
                             ),
-                            child: Text('Yes',
+                            child: const Text('Yes',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
