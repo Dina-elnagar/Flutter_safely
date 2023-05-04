@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-void main ()
-{
-  runApp(Ascreen());
-}
-class Ascreen extends StatelessWidget {
+
+class Cscreen extends StatelessWidget {
 
   Widget build(BuildContext context)
   {
@@ -26,19 +23,23 @@ class Ascreen extends StatelessWidget {
                  Padding(
                    padding: const EdgeInsets.all(32),
                    child: Container(
-                     width:238,
-                     height: 55,
+                     width:227,
+                     height: 48,
 
 
                      child: ElevatedButton(
                        style:ElevatedButton.styleFrom(
-                         primary: Colors.red,
+                         backgroundColor: Colors.red,
                          elevation: 20,
-                         shape: StadiumBorder()
+
 
                        ),
-                       onPressed: () {  },
-                       child:  Text('Stop',style: TextStyle(fontSize: 40,color: Colors.white,)),
+                       onPressed: () {
+
+                       },
+                       child: Text('Stop',
+                           style: TextStyle(fontSize: 30,color: Colors.white,)
+                       ),
                      ),
                    ),
                  ),

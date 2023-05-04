@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'Cscreen.dart';
 
 
 class Ascreen extends StatelessWidget {
@@ -60,8 +60,15 @@ class Ascreen extends StatelessWidget {
                           child:Container(
                             width: 200,
                             height: 40,
+                            
                             child: ElevatedButton(onPressed: ()
                             {
+                              Navigator.push
+                              (context, MaterialPageRoute(
+                                  builder: (context) => Cscreen(),
+                              ),
+                              );
+
                             },
                               style:ElevatedButton.styleFrom(
                                 primary: Colors.red,
@@ -79,6 +86,7 @@ class Ascreen extends StatelessWidget {
                         Container(
                           width:100 ,
                           height:40,
+
 
                           child:ElevatedButton(onPressed: ()
                             {
