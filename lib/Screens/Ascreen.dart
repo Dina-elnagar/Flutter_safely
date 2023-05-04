@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Cscreen.dart';
-
+import 'homescreen.dart';
 
 class Ascreen extends StatelessWidget {
 
@@ -90,6 +90,11 @@ class Ascreen extends StatelessWidget {
 
                           child:ElevatedButton(onPressed: ()
                             {
+                              var push = Navigator.push
+                                (context, MaterialPageRoute(
+                                  builder: (context) => HomeScreen(),
+                              ),
+                              );
                             },
                             style:ElevatedButton.styleFrom(
                                 primary: Colors.green,
@@ -126,4 +131,6 @@ class Ascreen extends StatelessWidget {
       ),
     );
   }
+
+
 }
