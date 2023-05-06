@@ -10,7 +10,7 @@ class AuthServices {
 
   loginData(String email, String password) async {
     final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/userLogin'),
+        Uri.parse('https://safelyy.store/api/userLogin'),
         headers: {
           'Accept': 'application/json'
         },
