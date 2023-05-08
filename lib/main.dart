@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter/CarInformation_screen.dart';
 import 'package:udemy_flutter/EmergencyContact_screen.dart';
-import 'package:udemy_flutter/MedicalInformation_screen.dart';
 import 'package:udemy_flutter/firebase_options.dart';
 import 'package:udemy_flutter/login_screen.dart';
 import 'package:udemy_flutter/personalinformaion_screen.dart';
@@ -38,8 +36,8 @@ class MYAPP extends StatelessWidget
           routes: {
             LoginScreen.screenRoute: (context) => LoginScreen(),
             PersonalInformationScreen.screenRoute: (context) => PersonalInformationScreen(),
-            MedicalInformationScreen.screenRoute: (context) => MedicalInformationScreen(),
-            CarInformationScreen.screenRoute: (context) => CarInformationScreen(),
+            //MedicalInformationScreen.screenRoute: (context) => MedicalInformationScreen(),
+            //CarInformationScreen.screenRoute: (context) => CarInformationScreen(),
             EmergencyContactScreen.screenRoute: (context) => EmergencyContactScreen(),
             EnableLocationScreen.screenRoute: (context) => EnableLocationScreen(),
             HomeScreen.screenRoute: (context) => HomeScreen(),
