@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'homescreen.dart';
 class Cscreen extends StatelessWidget {
 
   Widget build(BuildContext context)
@@ -36,6 +36,11 @@ class Cscreen extends StatelessWidget {
                        ),
                        onPressed: () {
 
+                         Navigator.push
+                           (context, MaterialPageRoute(
+                           builder: (context) => HomeScreen(),
+                         ),
+                         );
                        },
                        child: Text('Stop',
                            style: TextStyle(fontSize: 30,color: Colors.white,)
