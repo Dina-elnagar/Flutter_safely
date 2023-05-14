@@ -4,6 +4,7 @@ import 'package:udemy_flutter/Screens/editprofile.dart';
 import 'package:udemy_flutter/Screens/settings.dart';
 import 'package:udemy_flutter/Screens/contacts.dart';
 import 'package:udemy_flutter/Screens/car.dart';
+import 'Ascreen.dart';
 
 
 
@@ -295,6 +296,39 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push
+                          (context, MaterialPageRoute(
+                          builder: (context) => Ascreen(),
+                        ),
+                        );
+                      },
+                      child: Text(
+                        'SAFELY',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all<Size>(
+                          Size(1000, 50),
+                        ),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color(0xFFffae46),
+                        ),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
